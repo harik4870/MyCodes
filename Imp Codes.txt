@@ -21,3 +21,10 @@ for (Decimal key : valueCounts.keySet()) {
         System.debug('Duplicate Personnel Number : ' + key + ', Count: ' + valueCounts.get(key));       
     }   
 }
+************************************
+//To Assign Soql result to a string
+String Nam = [Select Id,Name From Account][0].Name;
+
+************************************
+
+
