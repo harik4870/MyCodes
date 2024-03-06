@@ -1,14 +1,5 @@
 How to include LWC in VF Page
 
-Grand total -345600
-Shakir - 83174 (paid until -December) 
-Hari - 200000(taken in - jan) Interest to be paid - 62453
-Total EMI - 14400
-Shakir EMI -9888
-Hari EMI - 4512
-Jan - paid - 4512
-Feb - paid - 4512
-
 To include an LWC component in VFPages we should create an Aura dependency application with your LWC.
 
 EX : 
