@@ -1,0 +1,718 @@
+How to include LWC in VF Page
+
+Grand total -345600
+Shakir - 83174 (paid until -December) 
+Hari - 200000(taken in - jan) Interest to be paid - 62453
+Total EMI - 14400
+Shakir EMI -9888
+Hari EMI - 4512
+Jan - paid - 4512
+Feb - paid - 4512
+
+To include an LWC component in VFPages we should create an Aura dependency application with your LWC.
+
+EX : 
+1.LWC component(myLwcComponent) which need to be displayed in VFPage.
+
+<template>
+<lightning-datatable data={data} columns={columns} key-field=”id”></lightning-datatable>
+</template>
+
+2.creating aura(AppForVF) dependency app using LWC.
+        <aura:application  access=”GLOBAL” extends=”ltng:outApp”>
+         <aura:dependency  resource=”c:myLwcComponent”/>
+         </aura:application>
+Note: aura application access should be global and it should extend ltng:out.
+
+3.Then create a VFPage 
+
+<apex:page showheader=”false”>
+    <apex:includeLightning/>
+// this a DOM element which controls where we should use our LWC component.
+<div id=”lwcContainer”></div>
+        <script>
+          $Lightning.use(“c:AppForVF”, function(){
+           $Lightning.createComponent(“c:myLwcComponent”,{Here we can pass the parameters from LWC},”lwcContainer”,
+function(cmp){
+
+});
+});
+
+//This lightning web component will we added into the above div when the component is loaded.
+      </script>
+</apex:page>
+
+
+
+
+
+
+
+How to include LWC in a Flow
+
+1.To pass values bw LWC and Flow we should use targetConfig properties
+
+<targetConfigs>
+<targetConfig  targets=”lightning__FlowScreen”>
+<property  name=””AnnualRevenue” label=”AnnualRevenue”  type=”Integer” role=”inputOnly”/>
+<property  name=””Name” label=”Account Name”  type=”text” role=”inputOnly”/>
+<property  name=””AnnualRevenue” label=”Account Chosen”                type=”@salesforce/schema/Account” role=”inputOnly”/>
+
+</targetConfig>
+</targetConfigs>
+
+Note : these properties should be public properties @api.
+
+2.To use flow actions like(Next,finish,previous,pause…) we should use events like.
+  a.FlowNavigationBackEvent - request navigation to previous screen.
+  b.FlowNavigationNextEvent - request navigation to the next screen.
+  c.FlowNavigationPauseEvent - request the flow runtime to pause the flow.
+  d.FlowNavigationFinishEvent - request the flow runtime to terminate the flow.
+  e.FlowAttributeChangeEvent  - informs the runtime that a component property has    changed.
+
+Note : we should import into the JS whatever we would like to use.
+ 
+
+3.To expose the LWC component to the Flow screen we should use lightning__FlowScreen in the targets.
+
+ <targets>
+     <target>lightning__FlowScreen</target>
+</targets>
+
+4.create the LWC component as per the requirement.
+5.use the LWC in the flow. You can find the component in custom components in the flow.Since we provided the targets.
+
+How to include LWC in Aura
+
+1.Create an LWC component.
+2.Create an Aura component in that we can include LWC directly with the name space.
+
+  <aura: component implements=”flexipage:availableForAllPageTypes>
+<c:myLwcComponent/>
+</aura:component>
+
+3.Then place this Aura comp in Aura Application.
+
+<aura:application extends=”force:slds”>
+<c:myAuraComponent/>
+</aura:application>
+
+*************************************************************************************************************
+JavaScript:Brandon Eich invented JavaScript in 1995 to bring interactivity in webPages.
+ Before the webPages are only readable we cannot perform any actions on webPages then.
+
+NETSCAFE NAVIGATOR  is the company that hired Brandon Eich to invent Javascript.
+INTERNET EXPLORER  is the competitor to NETSCAFE then.
+INTERNET EXPLORER copied all the features from JavaScript and added some features and created its own version of JavaScript and they named it as “Jscript”.
+
+Then cross browser compatibility issues arrived means, the one which worked on NETSCAFE NAVIGATOR browser is not working on INTERNET EXPLORER and vice versa.
+
+Like INTERNET EXPLORER every other browser started creating their own JavaScript.
+
+Then ECMA International(Organization or Company) defined some set of specifications to be followed  in scripting language.
+
+**That specification or standards that tells how the scripting language should be is called ECMAscript.
+
+ES1 —  1997
+ES5 — 2009
+ES6 — 2015 ( In 2015 they changed to annual release cycle)
+
+
+
+Omni Channel : Any issue related to Agent work routing can we solved by Omni channel
+
+VisualForce(2008):
+It is a framework that allows developers to build custom user interfaces that can be hosted natively on Force.com platform.
+It includes tag based markup language similar to html and a set of server side standard and custom controllers that makes basic Database operations.
+
+# Used to create custom UI for salesforce.It follows page centric model.(Page centric focuses on particular page/screen as  primary unit of design)
+# All the backend processing is done with apex on the server side.
+# It is primarily built for desktops.
+# In Visualforce you would send an interaction to the Salesforce server and then update the entire page. Which will take a lot more time compared to Aura.
+
+
+Lightning(Aura- 2014):
+# It follows an App centric model.
+# Lightning Components are client-side centric, which makes them more dynamic and mobile friendly.
+# In Lightning, you can send an interaction to the Salesforce servers and then update a specific component,meaning we update the things the user is interacting with and everything else remains untouched.
+# Runs on ECMAscript 5
+# Most of the things like templates, modules,rendering & Data services are part of the framework.
+
+
+Lightning Web Components(2019):
+Lightning web components are custom HTML elements built using HTML and modern JavaScript.
+# Runs on ECMAscript 7
+#Better performance
+# Faster development
+#Easy learning
+#compatibility across browsers
+
+
+
+
+
+
+
+Why LWC when we have Aura ?
+Aura was introduced in 2014 then web standards offered only a limited foundation for the full stack developers i.e,(ECMAscript 5). The key elements like component model,templates,modules and shadow DOM are all missing from the web standards. Which got introduced later in 2019 so Salesforce released LWC in 2019
+Therefore LWC introduced better Web standards,Performance,faster loading sites, security, browser compatibility & ease of development.
+
+Need of Aura even after LWC:
+LWC supports one-way binding where as Aura supports two-way binding.Let's say we have a parent and child components where we need to pass data bw components.
+In case of LWC we pass data from parent to child directly via public property but, to pass from child to parent we need to write a custom event. Incase of Aura it is not like that since it supports two-way binding.
+Features that are not supported by LWC:
+Global Value Providers: LWC does not yet support global value providers, which are used to share data between components 
+Lightning Out: LWC does not yet support Lightning Out, which allows you to use Lightning components outside of Salesforce 
+Lightning Components for Visualforce: LWC does not yet support Lightning components for Visualforce, which allows you to use Lightning components in Visualforce pages 
+Custom Actions: LWC does not yet support custom actions, which are used to create custom buttons and links 
+
+
+
+
+
+*************************************************************************************************************
+
+
+Profile: Profile is a combination of settings and permissions which defines what a User can do in the organization. Profiles come under object level access. When it comes to object level access we have profiles and permissions. The best practice is that we start with profile and we will minimize access in profile and will keep increasing the required permissions using permission sets depending on who needs the access.
+
+Role: Role comes under record level access. It determines what a User can see in the organization. When it comes to roles OWD comes into picture. This OWD controles the record sharings. We have different types of sharing 1.manual sharing, 2.Criteria based sharing, 3. Role hierarchy ,4.Account teams.
+
+Account Teams:When the Organization-Wide Defaults (OWD) for accounts are set to Private, Account Teams provide a way for users to gain access to specific accounts without changing the overall sharing settings. With Account teams we can set different levels of access and permissions on individual Account.
+
+PermissionSets:
+Permission sets are used to assign additional permissions to a user apart from what he got from Profile.Basically used to increase the permissions.
+
+Custom Settings:  Custom settings are used to store frequently accessed data. In this the data will be stored in application cache, which avoids repeated query execution to the database therefore the performance will be increased.
+We have List Custom settings and Hierarchy custom settings.
+
+Limitations:
+1.We can not create lookup/master-details/Formula/picklist in custom settings.
+2.You can’t define validation rules on Custom Settings.
+3.You can’t define workflow rules or triggers on a Custom Setting.
+4.No PageLayouts or Record Types.
+5.Data will not be deployed into another org.
+
+Custom Metadata: It is similar to custom settings but data is deployable to another orgs.
+ It covers all the limitations of custom settings.
+
+
+Note: we can get data from both custom settings and custom metadata using getAll() and getInstance() methods
+
+Custom Permissions:
+These are the permissions used to assign to perticular profile or to an perticular user. Custom permissions are used to check during run time whether that perticular logged in user have the permission to run certain business logic.
+let say we need to bypass a validation rule for Admin profile. Instead of passing the admin id or name in the validation we use custom permissions.
+
+Custom Labels:
+Custom labels are custom text values which we can access in Apex classes, Visualforce pages, or Lightning components. The values can be translated into any language which is supported by Salesforce . Main advantage Custom Label offers is it enables flexibility in code and values being fetched in code can be changed anytime without need to change code itself.
+
+
+Wrapper Class :
+**Wrapper class is a container in which different types of data can be stored in a single bucket.
+We generally use this when we are not sure what the apex method will return.
+
+Normally we write a class and we return something from that class that return type should be defined by us initially whether it is string/integer/List of records/one record.
+But we can not return one string & one Integer/ One contact & one Account with the normal standard data types of salesforce.
+
+But by using Wrapper class we can do that.
+
+
+Queue:
+Queues allow groups of users to manage a shared workload more effectively. A queue is a location where records can be routed to await processing by a group member. The records remain in the queue until a user accepts them for processing or they are transferred to another queue. You can specify the set of objects that are supported by each queue, as well as the set of users that are allowed to retrieve records from the queue.
+
+Public Groups:
+Public groups help us to place different Users, Roles, Roles and Subordinates and even public groups together so that we can apply sharing rules to all of them required accordingly.
+
+
+LookUp:
+Used to establish a relationship bw two objects.
+Both the parent and the child objects will have separate security controls and sharing settings. 
+No need to fill the data in the lookup field while creating a record.
+No casket delete and no Roll-up summaries will be supported. 
+
+
+Note : relation bw Account & Contact is Lookup but it have some special features, Like when we delete an Account it’s related contacts will also get’s deleted(cascade delete). 
+
+
+
+
+Master-Detail:
+Parent object will control the security and sharing settings of the child.
+Value should be filled while creating a record.
+Supports both Casket delete and Roll-Up summaries 
+
+
+Note : relation bw Account & Opportunity is Master-detail but it have some special features, Like we can create an Opportunity record without populating an Account to it.
+
+
+Junction Object:
+It comes under many to many relationship.
+Master detail relation is used to create junction object.
+First parent will control the security and sharing settings of the child
+Cascade delete is supported
+Ex:
+
+Opportunity Product is a junction object between Product2 and Opportunity.
+PriceBookEntry is a junction between Product2 and Pricebook2
+JobTask is the junction bw Job and Resources.
+
+Note: To see the records of an object one must have access to that object.Even if it is getting controlled by the parent.
+
+
+
+
+What do you mean by whatId and whoId in salesforce ?
+ In Salesforce, a WhatID(Related To) and WhoID(Name) are reference fields associated with an activity. 
+ The WhatID field is used to refer to the object associated with the activity, such as an Account, case, Opportunity and Campaign.
+ The WhoID field is used to refer to the user or group associated with the activity, such as a Leads, Contacts, Account Owner, or Opportunity Contact.
+
+
+Diff bw 15 digit and 18 digit Id :
+Custom objects and Standard Objects in Salesforce.com will have internal record ID. Internal record Id for all custom objects and Standard Objects like Opportunity, Account, Contact and so on will have only 15 digit ID number by default.
+
+15 digit Id number will have numeric digits range from (0-9), a Lowercase letter(a-z) or a Uppercase letters(A-Z). 15 digit ID in salesforce.com is case sensitive. Example 100000000000ABC  is different from 100000000000abc. When using external productive tools like Microsoft Excel, MS Access and SQL Server external ID’s are not case sensitive and they don’t recognize the difference between 100000000000ABC  and 100000000000abc.
+
+In Salesforce we generally have 15 digits ids and they are case sensitive. But when we are using productive tools like Excel/SQL external Ids they are not case sensitive and they don’t recognize the difference between 100000000000ABC  and 100000000000abc.
+
+Salesforce.com has recognized this problem and Salesforce.com has established an 18 digit character insensitive ID. This 18 Digit ID is case insensitive which is formed by adding a suffix to the 15 Character Id number.
+
+
+
+
+
+
+WORKFLOWS: 
+Workflows are used to automate the business process.
+Two types 1.Independent 
+                 2.Time dependent
+  criteria : 1.created, 
+                2.created and every time it's edited
+                3.Created and any time it's edited and subsequently met the criteria.
+
+  Actions : 1.Send an email alert,
+                 2.send outbound message,
+                 3.field Update
+                 4.create Task.
+ Note: Only child to parent update can be done viceversa is not possible.
+We can’t update parent objects from child objects where the other way round is possible.
+
+PROCESSBUILDER : 
+Salesforce Process Builder is basically an automated tool that allows you to control the order of actions or evaluate the criteria for a record. It has eight actions associated with it:
+
+Creating Records: This will allow you to create a new record and add different field values for it.
+
+Updating Records: You can update one or more records that are somehow related to the record that started the process. This can be done either by manually entering the records or by using the records from a related record.
+
+Posting on Chatter: Process Builder in Salesforce allows you to post on Chatter for sharing any information with any user.
+
+Quick Action: If you already have global actions or objects, within Salesforce, then you can use quick action to use them in any record.
+
+Launching or Triggering the Flow: It is possible for you to launch the flow from your process to automate different processes.
+
+Submitting the Record Automatically for Approval: The record that started your process can be submitted. Any other record cannot be automatically submitted.
+
+Calling or Triggering Apex Code: You can invoke an Apex code that you have already written in Salesforce.
+
+Invoking Another Process: This action will actually invoke a process to another process.
+
+*can update child records from parent
+*can include multiple workflows into processes with if and else conditions.
+Automation Champion - Automating Salesforce One Click at a Time : To learn more about Flows
+
+FLOWS:
+The flows in Salesforce are an automated application that captures all data and performs the necessary actions in the system. Flows are the strongest weapon of an admin in Salesforce. The Salesforce flow simplifies complex business processes using click, not code. 
+
+admin possesses a foundational understanding of the flows, he can operate it by just clicking on the application’s automated tabs.
+
+What are the Different Types of Flows?
+There are 5 types of Salesforce Flows.
+
+a. Screen flows
+b. Schedule-triggered flows
+c. Autolaunched flows
+d. Record-triggered flows
+e. Platform Event-triggered flow
+
+1. Screen Flow
+It can be called using a button or an action or displayed in a Lightning Page or the Utility Bar. It appears as a screen for the user to interact with. Screen flow cannot be automatically triggered.
+
+2. Record Triggered Flow
+It begins when a record is created or updated. Its functionality is similar to Process builder.
+
+3. Autolaunched Flow
+These can be called from Apex, Process Builder, or another Flow. They can perform actions automatically behind the scenes.
+
+4. Scheduled Triggered Flow
+It runs automatically on a recurring schedule. It is helpful for jobs performed frequently or on a schedule (once, daily, weekly).
+
+5. Platform Event-triggered Flows
+These are called when a platform event is received.
+
+
+
+
+
+
+SUB FLOWS:
+It allows complex logic to be reused across multiple Record-Triggered Flows without having to be rebuilt each time.
+Sub flows are used when we have common functionality in multiple flows. For example we can say creating a TASK. we may need to use that in multiple places.
+
+Flows are more capable compared to both Workflows and processes.It contains both the simplicity of Workflows and processes and it contains the capabilities of Triggers without writing a single line of code.
+We can run flows on a delete operation which is not possible with others.
+We can reach up to more objects in flows.
+
+Best Practices of Flows : 
+Should not do DML inside a loop.
+Should not use a get element inside a loop.
+Should always do null check
+Always bulkify the flow
+If there is any DML/SOQL make sure there is a fault element
+Make sure of proper debugging steps
+Proper naming convention
+Make sure of limited number of flows on each object
+Try to use sub flows
+
+Questions on Flows : 
+
+Can we call a future method inside a flow - No. But we can call an invocable method inside a flow which inturn calls a future method. But directly we can’t call the future inside flow.
+We can not pass a single variable to an invocable method; it accepts only a list.If you want to pass a single account then also we need to create a collection variable in flow and then we need to pass it to apex invocable method.
+If you want to pass a list of Account and a Boolean variable then, create a wrapper class, create 2 variables one is list of Account and other is Boolean variable make sure you have @Invocable in front of each variable. 
+We cannot call a sub flow from a record trigger flow.
+We cannot call a screenflow from an autolaunched flow and even vice-versa is not possible.
+To launch a screen flow upon click of a button we can achieve by creating an action.
+To pass a recordId from Recordpage to a flow we need to place the flow in that page and then we need to check “pass the Id into this variable”.
+
+
+
+
+
+
+
+
+Governor Limits:
+
+
+Decorators:
+
+@track : track decorator makes the properties private and also makes properties reactive. After spring 2020 salesforce made all the properties reactive. But When a property contains an object or an array, there’s a limit to the depth of changes that are tracked. To tell the framework to observe changes to the properties of an object or to the elements of an array, you need to decorate the field with @track.
+@track helps us to achieve two-way data binding
+@track is powerful, but remember, track a property only if you want the component to re-render when the property's value changes. Don't track every private property.
+@api: This is used to define a property as public so that property can be accessed from other components. We can pass the data from parent component to child components by using this.
+@wire: This annotation is used to connect a component to an Apex methods. So that we can fetch that data from Apex to LWC.We can’t perform any DML using Wire.
+DML is only possible with Imperative function.
+We have 2 functions in it. 1.Wire with property 2. Wire with function.
+
+LifeCycleHooks:
+The lifecycle hooks are the series of methods that are invoked during the components Lifecycle.
+
+1.Constructor : Invoked when the instance of the component is ceated.It is similar to init method  in aura components.This hook is fired from Parent to child.         
+use : it is used to initialize the component properties and state and we don't perform much complex things here. 
+
+2.ConnectedCallback : Invokes when the component is inserted into DOM.             
+use :this method is used to set up event listeners. In connected callbacks we perform the logic like fetching the data from the controller to LWC or sending data from LWC to controller.
+
+3.Render : Invokes after ConnectedCallback.
+use:This hook is used to override the standard rendering functionality in LWC to update the UI.We can conditionally render the template.
+
+4.RenderdCallback : Invokes when a component is completely rendered on UI/ into the DOM.Flow is from parent to child.
+use : it is used to manipulate the DOM elements in LWC
+
+5.DisconnectedCallback : Invokes when a component is removed from DOM.
+   use :This method is useful in cleaning up the resources or removing event listeners.
+
+6.ErrorCallback : Invoked when the component throws an error in one of the lifecycle hooks.
+
+@AuraEnabled(cacheable=true) annotation is used to cache the server's response on the client side, making subsequent calls to the same server method faster and more efficient.
+When a server method is marked as cacheable, the Lightning Platform stores the method's response in the client's cache. If the same method is called again with the same parameters, the Lightning Platform can retrieve the response from the cache instead of making a new server call. This can improve performance and reduce network traffic.
+Data Binding:
+Data binding is the synchronization between the controller and the template(HTML).
+One-Way Data Binding
+One-way data binding is a situation where information flows in only one direction in our case from the controller to the template(HTML).
+Two-Way Data Binding (@track)
+Two-way data binding in LWC will help users to exchange data from the controller to the template and form template to the controller.
+DOM:
+#Document object model.
+#DOM is a programming interface for HTML and XML documents that allows JavaScript Scripts and Java programs to be portable among web browsers.
+#DOM represents the content of HTML or XML in the form of a tree structure so that we can easily access, read and update the content of it.
+Document -  HTML/XML file
+Object – tags and the elements of the file
+Model- Layout or structure
+
+
+
+
+
+Shadow DOM:
+#Dom inside a DOM is called shadow DOM.
+#Generally it is used to encapsulate the markup and styling of the components.It makes sure that none of our styling leakes out and gets overwritten by external css.
+Note: If we want to pass our CSS across boundaries then we need to use Bubbles and Composed.
+Event Propagation:
+ Event propagation is the process by which an event travels from the root element of a page (usually the html element) to the element that triggered the event. 
+ There are two types of event propagation: bubbling and capturing.
+Bubbling:
+In bubbling, the event is first triggered on the element that was clicked, and then it bubbles up through its ancestors (parents, grandparents, etc.) until it reaches the root element.
+Bubbles: true will make the event to cross the boundary.
+Capturing:
+Capturing is the opposite of bubbling. In capturing, the event starts at the root element and travels down to the element that was clicked.
+Composed:true will make the event accessible outside the shadow dom.
+Let's examine the behavior based on certain combination.
+---------------------------------------------------------------------
+1.bubbles:false and composed:false - This is same as firing event without these event properties since they are defaulted to false by component framework.
+                                                 const customEvent = new CustomEvent('notify', {
+                                                                                                               bubbles: false,
+                                                                                                               composed: false
+                                                                                                            });
+  *****when bubbles:false and composed:false or the event doesn’t contain these two then the event which is fired in the child will only be handled by the immediate parent.
+
+2.bubbles:true and composed:false -Here again since the bubbles property is set to true but composed property, which is responsible for an event to cross the SHADOW Boundary, 
+ is set to false so we don't see much change in the behavior and output is the same as above.
+
+     const customEvent = new CustomEvent('notify', {
+    bubbles: true,
+    composed: false
+            });
+
+
+3.bubbles:true and composed:true - Here since bubbles property is set to true which allows the event to bubble up the hierarchy and setting composed property to true makes the event accessible outside the SHADOW DOM
+
+  const customEvent = new CustomEvent('notify', {
+    bubbles: true,
+    composed: true
+});
+
+4.There is no such event in LWC where bubbles:false and composed:true******
+Note: if both bubbles and composed are not present then the event can only be handled by the next immediate parent only.
+
+******* when both  bubbles:true and composed:true then the event will propagate through any number of parents in hierarchy.
+
+event.stopPropagation():
+If we want our event to stop propagating to grandparent then we use "event.stopPropagation();" in parent so the event will not reach to grandParent.
+PreventDefault():
+The event.preventDefault() method prevents the default behavior of an element from happening. For example, if you have a form with a submit button, and you want to prevent the form from being submitted when the button is clicked, you can use preventDefault() to cancel the default submission behavior.
+StopPropagation():
+The event.stopPropagation() method prevents an event from bubbling up the event chain. This can be useful if you have a click event on a parent element, and you want to prevent that event from being triggered when a child element is clicked.
+
+
+
+
+Lightning Data Services:
+1.By using Lightning Data Services we can directly fetch the data into LWC components without writing any Apex Code or any SOQL query.
+2.LDS will cache the record data locally on the client side and automatically update it when changes occur in the database.
+3.The Lightning Data Service provides a set of methods to create, read, update, and delete records. 
+4.The Lightning Data Service automatically enforces sharing rules and field-level security when reading or modifying records.
+Below are the 3 base lightning components build on Lightning Data Service:
+lightning-record-form: 
+A form with standard lightning UI to create, view or edit a record.
+Need to specify the mode attribute as either “View”,”Edit” or “Read Only”.
+Layout type can be “Full” or “Compact”.
+Save and cancel buttons will be added automatically
+We can use “Column” attribute to define number of columns in the layout
+It will not support prepopulating of fields when the form is loaded.
+
+
+lightning-record-edit-form: 
+A form to create records with specified fields or update fields in an existing record.
+The record will always open in Edit mode.
+Fields will be rendered based on the fields mentioned in the form.
+Save and cancel buttons need to be added.
+Need to use Lightning-layout and Lightning-layout-item to add multi column layout
+
+
+
+
+lightning-record-view-form: 
+A form to display specific fields data of a record in read-only mode
+The record will always open in View mode.
+Need to use Lightning-layout and Lightning-layout-item to add multi column layout
+
+
+Promise in LWC: 
+In Lightning Web Components, a promise is an object that can produce some value in the future.
+Promises are used in asynchronous calls, where the time to complete the transaction cannot be predicted. In LWC, calling the apex method is asynchronous and it returns a promise.
+We will see this generally in imperative ways of calling a method in LWC.
+
+
+Callouts from LWC :
+We can make callouts from LWC in 2 ways
+
+1.By passing  a parameter from LWC to the controller, we can make callouts from there. To perform any complex logic in the salesforce database we will use this method.
+
+2.We can make a callout from Lwc itself by using the "fetch method". For making any generic callouts(Google maps,weather reports) we can use this method. 
+
+Getter and Setter:
+Getter and setter methods are used to pass data from your visualforce page to your controller and vice versa.
+Get accessor : The "get" accessor is used to pass data from your Apex code to your Visualforce page. 
+Set accessor : The "set" accessor  is used to pass values from your visualforce page to the controller. 
+
+
+LMS:
+Before LMS there is a concept called Pub-Sub model using which we can communicate bw the lightning events which are inside the DOM. 
+But LMS has been introduced as a successor of pub-sub to communicate bw the components which are outside the DOM, which means we can communicate bw components which are not in the hierarchy like LWC to Visuaforce,Lwc to Aura.
+
+
+
+
+
+
+
+
+
+
+
+WithSharing:
+When an Apex class is declared as WithSharing means all the permissions and Sharing rules of a particular user will get enforced. If a particular user who is not having the permission to update a record tries to update means then the apex class will fail and he will not be able to update it.
+
+WithoutSharing:
+By default the class will run in WithoutSharing context unless we declare it with withSharing.
+WithoutSharing means class will run in system context and no permissions and sharing rules will get applied.
+
+Trigger best practices:
+1.One trigger for one object.
+2.Naming convention
+3.Logic should be inside a handler class
+4.No DML & SOQL inside a for loop  -- may hit governor limits(150 DML & 100 SOQL) -- we can query in a for loop but not inside a for loop.
+5.Use switch(Custom labels) to activate/deactivate the trigger in the production environment.
+6.Avoid any hardcoding.
+7.Should write proper comments about the code so that it will be helpful for other developers to work on it.
+8. Try to perform Database DML's.
+
+Errors in Apex:
+1.Null pointer exception: attempt to dereference a null object - to avoid use null check -- if(!accList.isEmpty()){
+2.Record is read only : when we try to manipulate the data on which the trigger is still running.
+3.Maximum trigger depth exceeded(Recursive trigger) occurs in after update context : we need to create another class with a static boolean variable and make it false. 
+                                Before DML check the boolean variable then make true of that variable and perform the DML.
+								
+		public class Recurssionhandler(){
+		public static Boolean checkRecurssion =false;
+                                  }
+								  
+		main class : if(!Recurssionhandler.checkRecurssion){
+                                     Recurssionhandler.checkRecurssion =true;
+                                   update accList;
+                                       }								   
+4.Sobject row was retrieved via SOQL without querying the required field.
+5.Too many SOQL -- because query inside a for loop.-- perform 100 soql.
+6.List index out of bounds : 0
+7.List has no rows for assignment to Sobject. 
+
+Apex Test best practices:
+1.Use @isTest at the Top for all the test classes
+2.Always put assert statements for negative and positive tests
+3.Use the @testSetup method to insert the test data into the Test class that will flow all over the test class.
+4.Always use Test.startTest() and Test.stopTest() doing this it will increase the governor limit of salesforce. We also use this to increase the governor limit.
+5.Use System.runAs() method to test the functionality in user Context.
+6.Do not put (seeAllData = true) in test class otherwise, use it for exceptional cases.It will provide access to all data in an organization, regardless of their role or profile.
+7.Avoid Using Hard Coding Ids anywhere in test Class or any apex class.
+8.Please make sure that each class has a minimum of 75% coverage and also the main functionality has been covered. If possible increase code coverage up to 95%.
+9.All class methods must be tested for at least 200 records and keep the real scenarios in mind.
+
+Exception handling:
+Exception Handling is a mechanism in salesforce to handle unwanted exceptions or errors. It is used to prevent that exception from breaking the flow of the code.
+
+Exceptional Handling – try, catch, finally, throw keywords
+
+try: This keyword is used to identify a block of code in which an exception can occur.
+catch: This keyword is used to identify a block of code that can handle a particular type of exception.
+finally: This keyword is used to identify a block of code that is guaranteed to execute.
+throw: This keyword is used to throw an exception, signaling that an error has occurred.
+
+Commonly used exceptions in Apex :
+1. DmlException
+2. Limit exception
+3. List Exception
+4. Math Exception
+5. NullPointer Exception
+6. QueryException
+
+
+Best practices in LWC:
+1. pass only primitive data types in custom events.
+2.Avoid using hardcoding, use custom labels
+3.To improve performance, specify specific fields instead of layout in lightning-record-form.  
+4.Include error handling in the code logic
+5.Use LDS whenever possible
+   Instead of making apex calls to get the data, try to use LDS. 
+   It requires no apex code and can perform Create, Read, Update, Delete operations on a    single record.  
+   It also takes care of the sharing rules and field-level security. 
+6. Be mindful of Case Sensitivity.
+7.Use @AuraEnabled(cacheable=true) to reduce the server call
+8.Don’t return a huge number of rows at once from the backend.Try to use limits in the query result.
+
+
+
+
+
+
+
+SOQL:
+SOQL is used to retrieve records for a single object.
+(Parent to child)
+when querying from parent to child(subQuery) we can only go to 2nd level that is from parent to child 
+EX:[Select Id,Name,(Select LastName From Contacts) from Account)
+
+(child to parent)
+when querying from child to parent we can go 5 levels
+EX:[Select LastName,FirstName,Account.Name,Account.Rating,Account from Contact.
+
+SOSL:
+SOSL to search fields across multiple objects. SOSL queries can search most text fields on an object.
+FIND {Hari} IN ALL FIELDS RETURNING Account(Name), Contact(FirstName,LastName,Department)
+
+Diff bw Static & Non-Static methods
+
+
+A static method is a method that belongs to the class rather than an instance of the class.
+They can be called directly on the class without creating an instance of the class.
+They cannot reference any non-static variables or methods in the class.
+They are useful for performing utility functions or for performing actions that do not depend on the state of any specific object.
+
+
+
+
+A non-static method is a method that belongs to an instance of the class rather than the class itself.
+They can only be called on an instance of the class.
+They can reference both static and non-static variables and methods in the class.
+They are useful for performing actions that depend on the state of a specific object.
+
+
+
+
+
+
+
+
+Authentication:
+Authentication is the process of verifying the Identity of an user by validating their credentials such as username and Password.
+
+Authorization:
+Authorization is the process of allowing an authenticated user access to resources.
+
+Named Credentials:
+Named Credentials is a feature in Salesforce that allows you to securely store and manage external API credentials, such as usernames, passwords, tokens, or endpoints, used for authenticating and accessing external systems or services
+
+Connected Apps:
+A connected app is a framework that enables an external application to integrate with Salesforce using APIs and standard protocols, such as SAML, OAuth, and OpenID Connect. Connected apps use these protocols to authenticate, authorize, and provide single sign-on (SSO) for external apps. The external apps that are integrated with Salesforce can run on the customer success platform, other platforms, devices, or SaaS subscriptions.
+
+
+
+          Difference bw Sales/Sales Console or Service/Service Console:
+Sales/Service Console allows to work with multiple records on a single screen. The major diff is the navigation. In Sales/Service console all the objects will open as a dropdown. All the related records will open in sub-tabs.
+“Service SetUp” (menu) is more for the Service Cloud customization. It contains tools that help you manage customer information and communication service. This is where you will find tools to connect your customers to your service center
+Community Cloud(Experience cloud) : Whenever you want your customers to have a portal for themselves so that they can resolve most of the problems automatically from that portal.
+In that portal we will publish all our knowledge articles about the frequent issues….
+It has a bigger purpose to serve.
+
+
+
+Service Cloud 
+Service cloud refers to the services or the customer support module in salesforce. It includes Cases, Solutions, Knowledge articles, Entitlements,Milestone and Assets.
+
+It also include features  like web2case, email2case, case auto assignment rules,escalation rules etc;
+
+Service cloud Automations:
+Email to case
+Web to case
+Case assignment rules
+Case auto response rules
+Escalation rules
+Business hours
+SLA 

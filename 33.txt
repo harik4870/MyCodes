@@ -1,0 +1,874 @@
+
+
+I am Hari Krishna. I have been a salesforce developer/Admin for the past 2 years. In these 2 years I worked on a POC and Project. The project which I am doing is Wealth Planning. It is for the employees who are in the position of Partners,Principals & Managing directors to manage their wealth after retirement. Actually the flow will start from the Contact object. The data will come from HANA to salesforce Contact Object from there Users and the Cases will be created.
+In this 4 types of cases will be created naming
+1.Vested cases - who are the position of PPMD for 10 years || turns 50 which comes later
+2.Mandatory retirement - turns 62
+3. Non-Mandatory retirement - retirement initiated by Firm/ Voluntary retirement
+4. Ad Hoc cases - Death in service/Long term disability/ White glove/VIP
+Once the cases get created an organizer will be assigned to the employee and an introduction mail will be sent to the user.
+If the PPMD is interested, a call will be scheduled with the counselor and an email will be sent  to submit some required documents.The PPMD will submit the documents from the Wealth Planning community portal.
+Then the plan will be prepared,reviewed and delivered to the PPMD.
+
+Responsibilities : 
+I Involved in both configuration and customization.
+My responsibilities are creating Apex classes and test classes.Batch classes, created lightning web components and generating templates using conga composer.
+Created profiles,users, public groups, permission sets,Queues, custom settings and Custom metadata.
+For deployment I used Changesets and Azure Deveops.
+
+
+Retail Sales:
+It is a sales process where the flow will start from Lead, Lead will be converted to Account,Contacts & Opportunities once the Opportunity is closed an order will be placed 
+
+
+
+Wealth Planning:
+It is a hybrid application where we were neither inclined to the sales cloud nor to the service cloud.
+
+Wealth Planning is for Deloitte employees who are in the position of “Partner”, “Principals” and “Managing Directors”(PPMDs) to manage their wealth after retirement.
+
+The Employees data will be coming from Successfactor to Salesforce on a regular basis into Contact Object.
+From the contact object Users and Cases will be created by respective batch classes. 
+
+There are 4 ways in which PPMDs will get retired for each way a case will be created: 
+
+1.Vested case : Either the employee should be in PPMDs position for 10 years or the PPMDs             turn 50 whichever comes later.
+
+2.Mandatory retirement case : These cases are for PPMDs who turn 62 years.Once the case is created it will be routed to the wealth planning queue.Then the case will be assigned to a wealth counselor.
+
+3.Non- Mandatory retirement case : These are for PPMDs who voluntarily retire or whose retirement is initiated by a firm.
+
+4.Ad-hoc cases : These are for PPMDs who are not eligible for vested or retirement wealth plannings service.But he is eligible due to special circumstances such as death in service/long term disability/white glove/VIP.
+
+Cases will be created accordingly then a Wealth counselor will be assigned to each employee.Then an introduction mail will be sent to PPMD.
+
+If the PPMD is interested, a call will be scheduled with the counselor and an email will be sent  to submit some required documents.The PPMD will submit the documents from the Wealth Planning community portal.
+Then the plan will be prepared,reviewed and delivered to the PPMD.
+
+Responsibilities : 
+I Involved in both configuration and customization.
+My responsibilities are creating Apex classes and test classes.Batch classes, created lightning web components and generating templates using conga composer.
+Created profiles,users, public groups, permission sets,Queues, custom settings and Custom metadata.
+For deployment I used Changesets and Azure Deveops.
+
+
+BiomatiQ:
+BiomatiQ Quality Solutions is a premier microbiology quality control products and services facilitator for the pharmaceutical and biotechnology industries.
+
+It is a lifeScience project.In this project 3 categories of people will present. 
+1.BA(Business Admin) - 1 for each country
+2.Managers - multiple under each BA
+3.Medical reps - multiple under each Manager
+
+The BA will upload targets to medical reps like where and all he needs to visit via excel. Initially basic validation will be done in excel then that data will be converted into objects in salesforce.
+Medical reps will be accessing the data from tablets in the field.
+Medical reps will visit both HCO & HCP. They will explain about the products to the doctors.
+
+
+Reps will update the works they have done and targets they have achieved via tablet.  And that will be sent for approval.
+Managers will approve/reject the works done by reps.
+
+HCO(Health Care Organizations) - doctors in the Hospital
+HCP(Health Care personnel) - individual doctor from a clinic.
+
+
+
+
+Jessi Publications:
+Jessi Publications is one of the leading sellers & suppliers of notebooks, matriculation school books, long size notebooks,Text books & NCERT books etc in TamilNadu. They sell these books in bulk as well as individually.
+
+For them we developed an application which starts from lead generation. Lead will be generated from many sources like web,phone,email and through direct contact as well.
+That lead will be converted to Account, Contact and Opportunity.
+
+All the deal details will be stored in Opportunity. From the Opportunity Quotes will be generated and the order will be placed.
+
+
+Poorvika:
+Poorvika is a leading mobile distributor in the market. For them we developed the Application to manage their sales and service process.
+
+Poorvika is leading mobile distributor in India, to develop, migrate and maintain their sales and service application. 
+The client needs an application to input prospect details, maintain and follow up till closure of the lead.
+Once the sale is closed, the entire data needs to be made available for Support team for future usage and maintenance of data till the life cycle of customer. 
+Main objective is to transform how poorvika employees acquire and manage customer’s data.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Wealth Planning Action Items
+-------------------------------
+1.Purchase Life Insurance
+  Protect your survivors with life insurance
+
+2.Confirm No Gaps in Umbrella Liability Coverage
+  Additional liability coverage
+
+3.Confirm Maximum Group LTD Insurance Coverage
+  Avoid substantial loss of income with LTD insurance
+
+4.Create a Will & Basic Estate Plan
+  Protect and maximize your estate following death
+
+5.Save Money
+ Other savings opportunities
+
+
+
+
+
+Purchase Life Insurance
+
+
+
+
+
+
+
+
+
+
+
+Save Money
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Wealth Planning Case Flow
+
+Process Flow:
+
+
+
+
+
+
+
+
+
+
+
+Case flow:
+
+
+
+SELECT Id,CaseNumber, Contact.Name,Contact.WP_Home_Address__c,	Contact.WCT_Contact_Address__c, AccountId,WP_Organizer__c  FROM Case where WP_Organizer__c != null
+
+
+Wealth Planning Service Overview - Managing Director
+Overview
+The internal wealth planning team within Deloitte Services LP (“Deloitte”) provides personal wealth planning services to Partners, Principals, and Managing Directors (“PPMDs”) at different career stages. Please note that the wealth planning team does not provide investment planning or investment advice. If you are seeking investment planning or advice, consider the investment advisors available under the DWealth program.
+
+The Wealth Planning Counselors on the internal wealth team have years of experience providing counsel and advice to our PPMDs. You will have the opportunity to work with one of our wealth planning counselors when you become eligible for wealth planning services.
+ 
+Eligibility & Timing
+As a PPMD, you are eligible to receive Retirement Planning when you are within 2 years of retirement. Eligibility occurs when you notify a member of the Pre-Retirement Team in Partner Matters of your intention to retire within 2 years. To discuss your plans to retire and kick off the retirement planning process, please contact the Pre-Retirement Team at US National Pre-Retirement Central. To learn more about the retirement process, please review the Retirement Planning Handbook. 
+
+Partners retiring at mandatory retirement do not need to contact the Pre-Retirement Team in Partner Matters to initiate the retirement process. You will receive an invitation from the Pre-Retirement Team to attend a Pre-Retirement meeting, generally held during the fiscal year prior to your mandatory retirement.  The Pre-Retirement meeting will cover important topics to help you prepare for retirement. Following the meeting, you will have an opportunity to schedule time with a wealth planning counselor to kick off your retirement planning.
+
+Partners & Principals (“Partners”) reaching the milestone of attaining the later of age 50 and vesting in the Partnership Agreement (“PA”) retirement benefit since fiscal year 2013 are eligible to receive our Vested Partner Wealth Planning service. Vesting in the PA retirement benefit occurs at 10 years of partner service or age 60.   During the fiscal year in which you achieve the later of age 50 and PA vesting milestone, the Wealth Planning Team will notify you via email of your eligibility followed soon after by an invitation for an introductory call to kick of the service.
+
+In the near future, we plan to roll out a Vested Managing Director Wealth Planning service. The Wealth Planning team will contact Managing Directors as they become eligible for the service. We hope to provide details including eligibility, timing, and a description of the service toward the end of FY20.
+
+You can view your current eligibility status on the wealth planning dashboard. If you have any questions about your eligibility, please email us at ppmdwealthplanning@deloitte.com. If you are not yet eligible for services, consider using the following resources for your personal wealth planning:
+
+Wealth Office | WealthPlanner | DWealth | Vanguard
+ 
+Retirement Planning for PPMDs
+The Retirement Planning service for PPMDs within 2 years of retirement is designed to educate and prepare PPMDs for their retirement benefit payout options and to estimate their retirement cash flows and financial picture.
+
+
+Deloitte Retirement Benefits Education
+The Pre-Retirement Team in Partner Matters will initiate the preparation of a personalized benefits exhibit that summarizes and quantifies your projected retirement benefit payout options in retirement. Your wealth planning counselor will walk you through the benefits exhibit and discuss the pros, cons, and considerations for each of the benefit payout options. The discussion will focus on your priorities among the considerations to enable you to make informed benefit payout decisions when you retire. Considerations include your cash flow needs, the impact of taxes, potential risks, and factoring in the needs of your survivors upon your death during retirement.
+
+
+Retirement Planning
+After the benefits education discussion, your Wealth Planning Counselor is available to prepare cash flow projections projecting your annual Deloitte cash flows during retirement. The cash flow projections will include rough estimates of the tax on your benefit payouts, resulting in estimated annual after-tax cash flows from Deloitte. In order to prepare these cash flow projections, you will have to submit your non-Deloitte income and deductions in our electronic organizer for purposes of projecting the rough tax on your Deloitte cash flows. To enable you to make informed benefit payout election when you retire, your wealth planning counselor is available to prepare cash flow projections comparing different retirement benefit payouts. Due to the volume of PPMDs we serve, we are unable to provide cash flow projections for more than a few scenarios. If you are unable to narrow down the benefit payouts to a few scenarios, you will have to run the multiple payout iterations on your own using the WealthPlanner tool. When you have narrowed down your scenarios to a reasonable amount, you may return to us for our more detailed cash flow projections. 
+
+Once you have decided on your benefit payout benefit options, your wealth planning counselor is available to prepare a more detailed analysis applying your projected after-tax income from Deloitte against your estimated retirement spending. This analysis will factor in your overall wealth, including your non Deloitte assets and liabilities. In order to receive this analysis, you will have to submit your non-Deloitte financial information in our electronic organizer. The analysis will include detailed annual cash flow and net worth projections over your lifetime.  The analysis will stress test key variables to identify potential risks to your retirement plan.
+ 
+Vested Partner Wealth Planning
+The Vested Partner Wealth Planning service for Partners attaining the later of age 50 and vesting in the PA retirement benefit since FY2013, is designed to assess whether partners are on track to achieve their financial goals.  The service includes an educational session on Deloitte retirement benefits, retirement planning, an educational session on pre-retirement Deloitte death benefits, survivor sufficiency planning, and estate planning.
+
+
+Deloitte Retirement Benefits Education
+Your wealth planning counselor will educate you on each of the Deloitte retirement benefit plans available to you as a partner. We will discuss how each plan works, key milestones for you to consider, payout decisions you will need to make when you retire, and considerations for each payout option. We will educate you on the impact of Deferred Taxable Income and the considerations for building retirement wealth through the MoRE program. The discussion will focus on your priorities to enable you to pick a payout option for modeling purposes in the retirement planning phase of the Vested Partner Wealth Planning service. Considerations include your cash flow needs, the impact of taxes, potential risks, and factoring in the needs of your survivors upon your death during retirement.
+
+
+Retirement Planning
+After the benefits education discussion, your Wealth Planning Counselor is available to prepare cash flow projections projecting your annual Deloitte cash flows during your remaining years as an active partner and continuing into retirement. The cash flow projections will include rough estimates of the tax on your Deloitte income, resulting in estimated after-tax annual cash flows from Deloitte. In order to prepare the cash flow projections, you will have to submit your non-Deloitte income and deductions in our electronic organizer for purposes of projecting the rough tax on your Deloitte cash flows. You will be required to pick one payout option for each Deloitte retirement benefit for purposes of the cash flow projection. Due to the volume of PPMDs we are serve, we unable to provide more than two cash flow projection scenarios. Two scenarios typically result from a partner contemplating more than one retirement age. If you are unable to narrow down your planning assumptions to two scenarios, you will have to run the multiple scenarios on your own using the WealthPlanner tool. You may come back to us for our more detailed cash flow projections after you narrow your planning to two scenarios. 
+
+Your wealth planning counselor is available to prepare a more detailed analysis applying your projected after-tax income from Deloitte against your current spending and factoring in changes to your spending over time. This analysis will factor in your overall wealth, including your non Deloitte assets and liabilities. In order to receive this analysis, you will have to submit your non-Deloitte financial information in our electronic organizer. The analysis will include detailed annual cash flow and net worth projections over your lifetime.  The analysis will stress test key variables to identify potential risks to your retirement plan. If you are falling short of meeting your retirement goal, we will provide suggestions to enable you to close the funding gap.
+
+
+Deloitte Pre-Retirement Death Benefits Education
+Your wealth planning counselor will educate you on the pre-retirement death benefits available at Deloitte. We will pull your beneficiary designations on file with the firm and include them in the discussion. We will discuss considerations for pre-retirement death benefit elections and beneficiary designations. The discussion will focus on your priorities among the considerations to enable you to make elections and designations that meet your goals.
+
+
+Survivor Sufficiency
+Your Wealth Planning Counselor will prepare a cash flow and net worth projection modeling the impact of your death on your family’s finances.  The analysis will assess whether your current wealth including life insurance is sufficient to maintain your family’s desired standard of living in the event of your death.   If you are falling short of maintaining your family’s standard of living, then we will quantify the life insurance needed to close the funding gap. We do not sell any products - if you need to adjust your life insurance, you will need to engage an outside insurance advisor or look to the group plan. If you do not have an insurance advisor, consider the options available under the DWealth program.
+
+
+Estate Planning
+Your Wealth Planning Counselor will provide an educational session on estate planning to familiarize you with estate planning basics and more advanced planning ideas.  We will review your current estate documents and beneficiary designations to map out the flow of your wealth upon your death.  We will estimate the impact of income taxes on your wealth and assess whether federal or state estate taxes are applicable. Depending on your goals and current estate plan, we might provide planning recommendations. We are unable to draft legal documents. If we recommend changes to your estate plan, you will need to take our recommendations to your estate planning attorney.
+
+Our estate planning service is limited to planning for United States federal and state estate taxes. We are unable to provide an analysis, assessment, or recommendations involving non-U.S interests and/or non-U.S. tax. If you have international planning issues or need an attorney to draft your estate plan, please review the providers available under the DWealth program.
+
+
+Additional Information
+If you have any questions or would like more information about the wealth planning process or your eligibility for services, please email the wealth planning mailbox at ppmdwealthplanning@deloitte.com.
+
+
+
+
+***User whose organizer is getting loaded but Wealth Organizer is not submitted - (Test 02, CS Director ND)
+                                           userName - 	csdirectortest02@deloitte.com.wp.prd.wpdev
+								            case no. - 3096
+								
+***User Whose organizer is not getting loaded but Wealth Organizer is submitted- (Test 03, Partner)
+                                userName - 	partnertest03@deloitte.com.wp.prd.wpdev
+								case no. - 3088
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Project Explaination
+
+I have worked on Biomatiq Quality Solutions project under Salesforce domain, BiomatiQ Quality Solutions is a premier Microbiology, Quality Control products, services facilitator 
+for the Pharmaceutical and Biotechnology industries.
+
+there i worked in sales module here the cycle is quoite different we weren't used any lead conversion procedure instead of Accounts we used company object to store the details
+the sales representatives they will collect information and create records they will create opportunites based on their collected requirements and  
+
+objects-- Companies, contact,opportunity, product, product list, product price book,order.....
+
+
+
+Project Poorvika:
+-------
+Poorvika is a leading mobile distributer in market for them we are developing the Application to manage their sales and service process
+like input prospect details and manage and follow the leads. on closed the deal to make available all the data to the support team for future use.
+
+Responsibilities:-> In that project as my part i involved in creating custom validations,objects,Approval process, Triggering mail alerts and flows,web components
+
+
+--> RealEstate
+Vijay Raja is a Real Estate Developers. The client needs to develop an application to maintain 
+the entire products info, helping the Sales Reps to track the same easily. 
+
+-->The main objective of this application is to help the Real Estate Company to manage their Customers and property listings all in one place 
+which includes improving sales, 
+Tracking leads, manage customer and customer details, listing properties, managing payments and generating reports.
+
+Here we have divided the application into 5 modules inquiry managment, Deal managment, property managment, order managment, payment managment.
+
+i majorly worked on Deal and order managment.
+
+we are capturing leads from social websites like magic bricks, facebook...
+we have channel partner object to store all these details like from which website this lead is created.
+we need to check before inserted leads in the Inquiry Object whether it is a existing or new one if it is a existing one only update those details with existing record
+and while creating leads based on the lead location the lead will be assigned to the assosiated sales rep and created a Task to that rep and sending email alert to lead 
+and sales rep.
+ the sales rep will contact that lead through direct or phone call and he will convert the lead in to customer and create site visit to the lead.
+he will follow the lead to the end of visit cycle. and after completion site visit we will create a deal to that customer and will provide quotation to them.
+if the customer is ok with that deal sales rep create booking with the unit he choose and with booking order record also would be created 
+from order we will choose the payment process and based on that we generate the paym,ent installments and on every installement need to follow the customers will emails and sms messages
+
+
+
+CaseCreationBatch:
+global class WP_WealthPlanningCaseCreation_Batch implements Database.Batchable<sObject>, Database.stateful, Database.RaisesPlatformEvents{
+    
+    global String query;
+    global String partner='ET1';
+    global String partnerInput = '%' + partner + '%';
+    global String managingDirector='ET2';
+    global String managingDirectorInput = '%' + managingDirector + '%';
+    
+    List<Exception> vestedCaseErrorList = new List<Exception>();
+    List<Exception> contactUpdateErrors = new List<Exception>();
+    List<Exception> mandatoryCaseUpdateErrorList = new List<Exception>();
+    
+    @TestVisible
+    private Date testToday {get; set;}
+    
+    global WP_WealthPlanningCaseCreation_Batch() {
+        query = 'SELECT Id, WP_Vesting_Date__c, Birthdate, WCT_Personnel_Type_Code__c, WP_Assigned_Wealth_Counselor__c, WCT_Region__c, WP_Mandatory_Retirement_Date__c, WCT_Type__c FROM Contact';
+        query += 'WHERE WCT_Personnel_Type_Code__c LIKE : managingDirectorInput OR WCT_Personnel_Type_Code__c LIKE : partnerInput';
+        System.debug('WP_WealthPlanningCaseCreation_Batch query: '+query);
+    }
+    
+    global Database.QueryLocator start(Database.BatchableContext bc){
+        return Database.getQueryLocator(query);
+    } 
+    
+    global void execute(Database.BatchableContext bc, List<Contact> contactList){
+        
+        /* Process to create wealth planning cases for vested partners */
+        System.debug('WP_WealthPlanningCaseCreation_Batch >> execute >> contactList: '+contactList);
+        WP_Case_Queue__mdt wpCaseSetting = [SELECT DeveloperName,
+                                            Eligible_for_Services_Date__c,
+                                            Eligible_for_Services_Date_MD__c FROM WP_Case_Queue__mdt WHERE DeveloperName = 'Eligibility_Criteria_for_Vested_Case'];
+        Id queueId = [SELECT Id FROM Group WHERE  Type = 'Queue' AND DeveloperName = 'WP_Wealth_Counsellor'].Id;
+        Schema.RecordTypeInfo rt = Schema.SObjectType.Case.getRecordTypeInfosByDeveloperName().get('WP_Wealth_Planning');
+        Id recordTypeId = rt.getRecordTypeId();
+        String recordTypeName = rt.getName();
+        List<Case> newVestedCaseList = new List<Case>();
+        List<Case> vestedCaseList = new List<Case>();
+        Set<Id> vestedContactIds = new Set<Id>();
+        Set<Id> contactIds = new Set<Id>();
+        Date currentDate;
+        if(Test.isRunningTest() && testToday != null)
+            currentDate = testToday;
+        else
+            currentDate = System.today();
+        
+        for(Contact con :  contactList){
+            String region = con.WCT_Region__c != null ? con.WCT_Region__c : '';
+            if(!region.contains('US - USI') && con.WCT_Type__c == 'Employee')
+                contactIds.add(con.Id);
+        }
+        
+        vestedCaseList = [SELECT Id,
+                          ContactId FROM Case WHERE Type = 'Vested' AND
+                          RecordTypeId =: recordTypeId AND
+                          ContactId IN : contactIds]; 
+        System.debug('WP_WealthPlanningCaseCreation_Batch >> execute >> vestedCaseList: '+vestedCaseList);
+        for(Case cse : vestedCaseList){
+            vestedContactIds.add(cse.ContactId);
+        }
+        System.debug('WP_WealthPlanningCaseCreation_Batch >> execute >> vestedContactIds: '+vestedContactIds);
+        for(Contact con : contactList){
+            String region = con.WCT_Region__c != null ? con.WCT_Region__c : '';
+            String jobLevel = con.WCT_Personnel_Type_Code__c != null ? con.WCT_Personnel_Type_Code__c : '';
+            if(con.Birthdate != null && con.WP_Vesting_Date__c != null && !region.contains('US - USI') && con.WCT_Type__c == 'Employee' && !vestedContactIds.contains(con.Id)){
+                Date birthDate = con.Birthdate;
+                Date cutOffDate;
+                Date ppmdTurnsFiftyDate = birthDate.addYears(50);
+                Date eligibilityDate = ppmdTurnsFiftyDate > con.WP_Vesting_Date__c ? ppmdTurnsFiftyDate : con.WP_Vesting_Date__c;
+                if(jobLevel.contains(partner))
+                    cutOffDate =  wpCaseSetting.Eligible_for_Services_Date__c;
+                else if(jobLevel.contains(managingDirector))
+                    cutOffDate =  wpCaseSetting.Eligible_for_Services_Date_MD__c;
+                if(eligibilityDate <= currentDate && eligibilityDate > cutOffDate){
+                    Case cse = new Case();
+                    cse.ContactId = con.Id;
+                    cse.RecordTypeId = recordTypeId;
+                    cse.OwnerId = con.WP_Assigned_Wealth_Counselor__c != null ? con.WP_Assigned_Wealth_Counselor__c : queueId;
+                    cse.Subject = recordTypeName + ' - Vested';
+                    cse.Origin = 'Automated Creation';
+                    cse.Priority = '3 - Medium';
+                    cse.Reason = 'Wealth Planning';
+                    cse.Status = 'New';
+                    cse.Type = 'Vested';
+                    cse.WP_Case_Created_Automatically__c = true;
+                    cse.WP_Sub_status__c = 'Assigned';
+                    newVestedCaseList.add(cse);
+                }
+            }
+        }
+        System.debug('WP_WealthPlanningCaseCreation_Batch >> execute >> newVestedCaseList: '+newVestedCaseList);
+        if(!newVestedCaseList.isEmpty()){
+            try{
+                //System.debug('WP_WealthPlanningCaseCreation_Batch >> execute >> Inside try block');
+                Database.insert(newVestedCaseList);
+            }
+            catch(Exception e){
+                //System.debug('WP_WealthPlanningCaseCreation_Batch >> execute >> Exeption occurred: '+e);
+                vestedCaseErrorList.add(e);
+            }
+        }
+        
+        /*Process to update Mandatory Retirement Date of Partner/Principal Contacts */
+        List<Period> fiscalYearList = [SELECT FiscalYearSettings.Name, 
+                                       StartDate, 
+                                       EndDate FROM Period WHERE Type = 'Year'];
+        List<Contact> updateContactList = new List<Contact>();
+        for(Contact con : contactList){
+            Date birthDate = con.Birthdate;
+            String jobLevel = con.WCT_Personnel_Type_Code__c;
+            if(birthDate != null && jobLevel.contains(partner)){
+                Date retirementAge = birthDate.addYears(62);
+                for(Period fiscalYear : fiscalYearList){
+                    if(retirementAge >= fiscalYear.StartDate && retirementAge <= fiscalYear.EndDate && fiscalYear.EndDate != con.WP_Mandatory_Retirement_Date__c){
+                        con.WP_Mandatory_Retirement_Date__c = fiscalYear.EndDate;
+                        updateContactList.add(con);
+                    }
+                }
+            }
+        }
+        System.debug('WP_WealthPlanningCaseCreation_Batch >> execute >> updateContactList: '+updateContactList);
+        if(!updateContactList.isEmpty()){
+            try{
+                Database.update(updateContactList);
+            }
+            catch(Exception e){
+                contactUpdateErrors.add(e);
+            }
+        }
+        
+        /*Process to update Case owners to the mandatory retirement cases
+        from Wealth Planing queue on 1st July of the retirement year */
+        Schema.RecordTypeInfo rType = Schema.SObjectType.Case.getRecordTypeInfosByDeveloperName().get('WP_Wealth_Planning_Retirement');
+        Id retirementRecordTypeId = rType.getRecordTypeId();
+        Id wpQueueId = [SELECT Id FROM Group WHERE  Type = 'Queue' AND DeveloperName = 'WP_Wealth_Counsellor'].Id;
+        List<Case> mandatoryRetirementCaseList = [SELECT Id, 
+                                                  OwnerId,
+                                                  Contact.WP_Mandatory_Retirement_Date__c FROM Case WHERE Type = 'Mandatory Retirement' AND 
+                                                  OwnerId =: wpQueueId AND 
+                                                  recordTypeId =: retirementRecordTypeId AND
+                                                  Status != 'Closed' AND 
+                                                  ContactId IN : contactList];                                                                         
+        List<Case> holdingCaseList = new List<Case>();
+        for(Case cse : mandatoryRetirementCaseList){
+            if(cse.Contact.WP_Mandatory_Retirement_Date__c != null){
+                Date dateToday;
+                if(Test.isRunningTest() && testToday != null)
+                    dateToday = testToday;
+                else
+                    dateToday = System.today();
+                Date retirementDate = cse.Contact.WP_Mandatory_Retirement_Date__c;
+                Date thisDate = retirementDate.addYears(-1);
+                if(dateToday.month() == 7 && dateToday.year() == thisDate.year()){
+                    holdingCaseList.add(cse);
+                }
+            }
+        }
+        /*
+        if(!holdingCaseList.isEmpty()){
+            //Get list of Wealth Consellors based on their workload
+            Integer recordLimit = holdingCaseList.size();
+            List<Id> roleIdList = new List<Id>();
+            //List<Case> caseList = new List<Case>();
+            Set<Id> userIdList = new Set<Id>();
+            Set<Id> roleIds = new Set<Id>();
+            List<GroupMember> queueMembers = [Select UserOrGroupId From GroupMember where GroupId IN 
+                                              (SELECT Id from Group where  Type = 'Queue' AND DeveloperName = 'WP_Wealth_Counsellor')];
+            
+            for(GroupMember gm : queueMembers){
+                String userGroupId = gm.UserOrGroupId;
+                if(userGroupId.subString(0,3) == '005'){
+                    userIdList.add(userGroupId);
+                }
+                else if(userGroupId.subString(0,3) == '00G'){
+                    roleIdList.add(userGroupId);
+                }   
+            }
+            if(!roleIdList.isEmpty()){
+                List<Group> roleList = [SELECT Id,
+                                        RelatedId FROM Group where Id  IN : roleIdList];
+                for(Group g : roleList){
+                    roleIds.add(g.RelatedId);        
+                }
+                List<User> users = [SELECT Id,
+                                    Name FROM User WHERE UserRoleId IN : roleIds and IsActive=true];
+                if(!users.isEmpty()){
+                    Set<Id> userIds = (new Map<Id, User>(users)).keySet();
+                    userIdList.addAll(userIds); 
+                }
+            }
+            List<Case> caseList = [SELECT Id,
+                                   OwnerId FROM Case WHERE OwnerId IN : userIdList AND 
+                                                           Status != 'Closed' LIMIT 50000];
+            if(!caseList.isEmpty()){
+                Map<Id, Integer> userVsCaseMap = new Map<Id, Integer>();
+                List<Integer> caseSizeList = new List<Integer>();
+                List<Id> newUserIdList = new List<Id>();
+                for(Id userId : userIdList){
+                    Integer newCaseCount = 0;
+                    for(Case cse : caseList){
+                        if(cse.OwnerId == userId)
+                            newCaseCount++;
+                    }
+                    caseSizeList.add(newCaseCount);
+                }
+                newUserIdList.addAll(userIdList);
+                for(Integer i = 0 ; i < caseSizeList.size() ; i ++) {
+                    for(integer j = i+1 ; j <= caseSizeList.size() -1 ; j ++ ){
+                        integer x = 0 ;
+                        Id y;
+                        if(caseSizeList[i] >  caseSizeList[j]){
+                            x = caseSizeList[i];
+                            y = newUserIdList[i];
+                            caseSizeList[i] = caseSizeList[j];
+                            newUserIdList[i] = newUserIdList[j];
+                            caseSizeList[j]  = x;
+                            newUserIdList[j]  = y;
+                        }
+                    }
+                }
+                Integer incr = 0;
+                List<Case> newMandatoryRetirementCaseList = new List<Case>();
+                for(Case cse : holdingCaseList){
+                    if(incr >= newUserIdList.size() - 1)
+                        incr = 0;
+                    cse.OwnerId = newUserIdList[incr];
+                    newMandatoryRetirementCaseList.add(cse);
+                    incr++;
+                }
+                System.debug('WP_WealthPlanningCaseCreation_Batch >> execute >> newMandatoryRetirementCaseList: '+ newMandatoryRetirementCaseList);
+                if(!newMandatoryRetirementCaseList.isEmpty()){
+                    try{
+                        Database.update(newMandatoryRetirementCaseList);
+                    }
+                    catch(Exception e){
+                        mandatoryCaseUpdateErrorList.add(e);
+                    }
+                }
+            }
+            
+        } */
+    }
+    
+    global void finish(Database.BatchableContext bc){
+        if(!vestedCaseErrorList.isEmpty()) {
+            System.debug('Exception on insert: '+vestedCaseErrorList);
+        }
+        if(!contactUpdateErrors.isEmpty()) {
+            System.debug('Exception on update: '+contactUpdateErrors);
+        }
+        if(!mandatoryCaseUpdateErrorList.isEmpty()) {
+            System.debug('Exception on update: '+mandatoryCaseUpdateErrorList);
+        }
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+UserCreationBatch:
+global class UserCreation_Batch implements Database.Batchable<sObject>,Database.Stateful
+{
+    global Id contid = Schema.SObjectType.Contact.getRecordTypeInfosByName().get('Employee').getRecordTypeId();
+    //global Id cont_recid = Schema.SObjectType.Contact.getRecordTypeInfosByName().get('Employee').getRecordTypeId();
+    global final String Query;
+    global Id ExceptionId;
+    global Id UserLogId;
+    String region = 'USI';
+    string regionFilter='%'+region+'%';
+    List<Exception_Log__c> Userlog=new List<Exception_Log__c>();
+    global List<contact> ContactUpdate=new List<contact>(); 
+    public Profile profileId;
+    public PermissionSet default_permissionset;
+    public UserRole roleId;
+    public PermissionSet client_permissionset;
+    public PermissionSetLicense permssionset_license;
+    global integer UsersCreated=0; 
+    public String userPostfix;
+   //holds the new users sobject
+    global UserCreation_Batch( String q)
+    {
+        Query=q;
+    }
+    global Database.QueryLocator start(Database.BatchableContext BC)
+    {
+        
+        Schema.DescribeSObjectResult Cas = Exception_Log__c.SObjectType.getDescribe();// getting Sobject Type
+        Map<String,Schema.RecordTypeInfo> rtMapByNames = Cas.getRecordTypeInfosByName();// getting the record Type Info
+        UserLogId =rtMapByNames.get('User Management').getRecordTypeId();//particular RecordId by  Name
+        //holds the record type id of exception object to log the failures.
+        Schema.DescribeSObjectResult Cas1 = Exception_Log__c.SObjectType.getDescribe();// getting Sobject Type
+        Map<String,Schema.RecordTypeInfo> rtMapByNames1 = Cas1.getRecordTypeInfosByName();// getting the record Type Info
+        ExceptionId =rtMapByNames1.get('Exception').getRecordTypeId();//particular RecordId by  Name
+        
+        String strDomain = [SELECT Domain FROM Domain][0].Domain;
+        userPostfix= 'wp.prd';
+        if(strDomain.indexOf('-')>0){
+            userPostfix = userPostfix + '.' + strDomain.substringBefore('-');
+        }
+
+        
+        profileId=[select Id,Name from Profile where name =:User_Constants.PROFILE_NAME limit 1];
+        roleId =[SELECT Id,Name FROM UserRole where Name =:User_Constants.ROLE_NAME limit 1]; 
+        client_permissionset=[SELECT Id,Name FROM PermissionSet  WHERE Name =:User_Constants.WP_CLIENT_PERMISSIONSET limit 1];
+        default_permissionset=[SELECT Id,Name FROM PermissionSet  WHERE Name =:User_Constants.DEFAULT_PERMISSIONSET limit 1];
+        permssionset_license=[SELECT Id, MasterLabel FROM PermissionSetLicense where MasterLabel=:User_Constants.PERMISSIONSET_LICENSE limit 1];
+        return Database.getQueryLocator(Query);
+    }
+    global void execute(Database.BatchableContext BC,List<contact> Names){
+        try{
+            List<User> UserList=new List<User>();
+            List<PermissionSetAssignment> Psalst=new List<PermissionSetAssignment>();
+            List<PermissionSetLicenseAssign> PSLcs=new list<PermissionSetLicenseAssign>();
+            Map<String,String> timeZoneForUser=new Map<String,String>(); // Region , TimeZonSidCode
+            timeZoneForUser.put('EAST','America/New_York');
+            timeZoneForUser.put('CENTRAL','America/Chicago');
+            timeZoneForUser.put('WEST','America/Los_Angeles');
+            timeZoneForUser.put('USI','Asia/Kolkata');
+            
+            
+            for(Contact c:Names){
+                if(c.Email!=null && (c.Email.containsIgnoreCase('@deloitte'))){  
+                    //  if(c.Email!=null){  
+                    system.debug('new user'+c.email);
+                    string cusernm=c.Email;
+                    string frstnm=c.FirstName;
+                    string cusernmn=c.WCT_Office_City_Personnel_Subarea__c;
+                    cusernmn=cusernmn + ','+ cusernm;
+                    
+                    User u = new User ();
+                    u.FirstName = c.FirstName;
+                    u.LastName = c.LastName;
+                    u.UserName=c.Email+'.'+userPostfix;
+                    u.ProfileId=profileId.Id;
+                    u.UserRoleId=RoleId.Id;
+                    u.Email=c.Email;
+                    u.FederationIdentifier=(c.Email).split('@')[0];
+                    
+                    
+                    u.Alias='';
+                    if(c.FirstName!=null && c.FirstName!='')
+                    {
+                        u.Alias=(c.FirstName).substring(0,1);
+                    }
+                    if(c.LastName.length()>=3)
+                    {
+                        u.Alias=u.Alias+ c.LastName.substring(0,3);
+                    }
+                    if(c.LastName.length()==2)
+                    {
+                        u.Alias=u.Alias+ c.LastName.substring(0,2);
+                    }
+                    if(c.LastName.length()==1)
+                    {
+                        u.Alias=u.Alias+ c.LastName.substring(0,1);
+                    }
+                    
+                    u.CommunityNickName=(c.Email).split('@')[0];
+                    u.IsActive=true;
+                    if(c.WCT_Region__c == null || c.WCT_Region__c==''){
+                        u.TimeZoneSidKey='America/El_Salvador';
+                    }else{
+                        string region=c.WCT_Region__c;
+                        if(region.containsIgnoreCase('USI')){
+                            u.TimeZoneSidKey=timeZoneForUser.get('USI');
+                        }else  if(region.containsIgnoreCase('WEST')){
+                            u.TimeZoneSidKey=timeZoneForUser.get('WEST');
+                        }else  if(region.containsIgnoreCase('EAST')){
+                            u.TimeZoneSidKey=timeZoneForUser.get('EAST');
+                        }else  if(region.containsIgnoreCase('CENTRAL')){
+                            u.TimeZoneSidKey=timeZoneForUser.get('CENTRAL');
+                        }else{
+                            u.TimeZoneSidKey='America/El_Salvador';     
+                        }
+                    }
+                    u.LanguageLocaleKey='en_US';
+                    u.LocaleSidKey='en_US';
+                    u.Contact_ID__c=c.id;
+                    u.EmailEncodingKey ='ISO-8859-1';
+                    u.EmailPreferencesAutoBcc=false;
+                    u.EmailPreferencesAutoBccStayInTouch=false;
+                    u.EmailPreferencesStayInTouchReminder=true;
+                    u.UserPreferencesTaskRemindersCheckboxDefault=true;
+                    u.ReceivesAdminInfoEmails=false;
+                    u.ReceivesInfoEmails=false;
+                    u.UserPreferencesEventRemindersCheckboxDefault=true;
+                    u.Title=cusernmn;
+                    //adding to the list
+                    //IdforProfile.add(pr);
+                    UserList.add(u);
+                    ContactUpdate.add(c);
+                    system.debug('UserList'+UserList.size());
+                }
+            }
+            if (UserList.size()>0)
+            {
+                // System.debug('Creating New User');
+                Database.DMLOptions dlo = new Database.DMLOptions();
+                dlo.EmailHeader.triggerUserEmail = false;
+                Database.SaveResult[] NewUserList = Database.insert(UserList, dlo);
+                for (Integer i=0;i<NewUserList.size();i++ )
+                {  
+                    if(NewUserList.get(i).isSuccess())
+                    {
+                        PermissionSetLicenseAssign p = new PermissionSetLicenseAssign();
+                        p.PermissionSetLicenseId=permssionset_license.id;
+                        p.AssigneeId=NewUserList.get(i).getId();
+                        PSLcs.add(p);
+                        UsersCreated++;
+                        Userlog.add(New Exception_Log__c(Exception_Date_and_Time__c=system.now(),Action__c='NewUser Creation',User_Description__c='Creating a new user'+UserList.get(i).Email,RecordTypeId= UserLogId,Running_User__c = UserInfo.getUserId(),Status__c='Success') );
+                        //System.debug('Contact Id in User >>'+NewUserList.get(i).get(Contact_ID__c));
+                        
+                    }else{
+                        for (Database.Error err : NewUserList.get(i).getErrors())
+                        {
+                            string exmsg=err.getMessage();
+                            string msg='Error while creating the new user at : '+ UserList.get(i)+':'+ err.getStatusCode() + ' :' + err.getMessage();
+                            Userlog.add(New Exception_Log__c(className__c='User Creation',pageName__c='Batch Class',Exception_Date_and_Time__c=system.now(),Detailed_Exception__c=msg,RecordTypeId= ExceptionId,Running_User__c = UserInfo.getUserId(),status__c='Failure') );    
+                        }  
+                    }
+                }
+                // System.debug('Creating New User'+NewUserList);
+            }
+            if(PSLcs.size()>0)
+            {
+                Database.SaveResult[] PermListSetl = Database.insert(PSLcs, false);
+                for (Integer i=0;i<PermListSetl.size();i++)
+                {
+                    if (PermListSetl.get(i).isSuccess())
+                    {
+                        PermissionSetAssignment psa = new PermissionSetAssignment();
+                        psa.PermissionSetId=default_permissionset.id;
+                        psa.AssigneeId=PSLcs.get(i).AssigneeId;
+                        
+                        PermissionSetAssignment psa_client = new PermissionSetAssignment();
+                        psa_client.PermissionSetId=client_permissionset.id;
+                        psa_client.AssigneeId=PSLcs.get(i).AssigneeId;
+                        
+                        Psalst.add(psa_client);
+                        Psalst.add(psa);
+                        
+                        Userlog.add(New Exception_Log__c(Exception_Date_and_Time__c=system.now(),Action__c='PSL Creation',User_Description__c='Creating a new Permission set license'+PSLcs.get(i).AssigneeId,RecordTypeId= UserLogId,Running_User__c = UserInfo.getUserId(),Status__c='Success') ); 
+                        
+                    }else{
+                        for (Database.Error err : PermListSetl.get(i).getErrors())
+                        {
+                            String msg='Error while assigning the permission set license assignment at : '+ PSLcs.get(i)+':'+ err.getStatusCode() + ' :' + err.getMessage();
+                            Userlog.add(New Exception_Log__c(className__c='User Creation',pageName__c='Batch Class',Exception_Date_and_Time__c=system.now(),Detailed_Exception__c=msg,RecordTypeId= ExceptionId,Running_User__c = UserInfo.getUserId(),status__c='Failure') );    
+                            
+                        }
+                    }
+                }
+                if(Psalst.size()>0){
+                    Database.SaveResult[] permList = Database.insert(psalst, false);
+                    for (Integer i=0;i<permList.size();i++)
+                    {
+                        if (permList.get(i).isSuccess())
+                        {
+                            Userlog.add(New Exception_Log__c(Exception_Date_and_Time__c=system.now(),Action__c='PSCreation',User_Description__c='Creating:Permission set for User Id'+psalst.get(i).AssigneeId+'and PS id'+psalst.get(i).PermissionSetId,RecordTypeId= UserLogId,Running_User__c = UserInfo.getUserId(),Status__c='Success') ); 
+                        }else{
+                            
+                            for (Database.Error err : permList.get(i).getErrors())
+                            {
+                                String msg='Error while assigning the permission set at: '+ psalst.get(i)+':'+ err.getStatusCode() + ' :' + err.getMessage();
+                                Userlog.add(New Exception_Log__c(className__c='User Creation',pageName__c='Batch Class',Exception_Date_and_Time__c=system.now(),Detailed_Exception__c=msg,RecordTypeId= ExceptionId,Running_User__c = UserInfo.getUserId(),status__c='Failure') ); 
+                            }
+                        }
+                    }
+                }
+                
+            }
+            
+            
+            
+        }Catch(Exception e){
+            System.debug('Final catch of Exception');
+            Userlog.add(New Exception_Log__c(className__c='User Creation',pageName__c='Batch Class',Exception_Date_and_Time__c=system.now(),Detailed_Exception__c=e.getMessage()+ e.getLineNumber(),RecordTypeId= ExceptionId,Running_User__c = UserInfo.getUserId(),status__c='Failure') );    
+        }
+    }
+    global void finish(Database.BatchableContext BC)
+    {
+
+        string sendemail=System.Label.User_Management_Emails;
+        List<string> Sending=new List<String>();
+        if(sendemail != null){
+          Sending= sendemail.split(','); 
+        }
+        //inserting the exceptions into exceptions log
+        
+        AsyncApexJob a =[SELECT Id, Status, NumberOfErrors, JobItemsProcessed,TotalJobItems,CreatedBy.Email,ExtendedStatus FROM AsyncApexJob WHERE Id =:BC.getJobId()];        
+        Messaging.SingleEmailMessage mail = new Messaging.SingleEmailMessage();
+        string td1='"border:1px solid green; width=200px;"';
+        string td2='"width=200px; border:1px solid green; background-color:red; color:white; font-weight:bold;"';
+        string tdHead='"border:1px solid green; width=200px; color:white; background-color:green; font-weight:bold;"';
+        string htmlBody = '<div style="border:2px solid green; border-radius:15px;"><p>Hi,</p><p><span style="color:brown; font-weight:bolder;">Salesforce</span> completed running <b>Apex Batch Code</b>.</p>'
+                                +'<p>The batch Apex job processed '+ a.TotalJobItems +
+                                                  ' batches with '+ a.NumberOfErrors + ' failures.</p>'
+                                +'<p>The  users information is below:</p>'+
+                                '<p>The number of  users created are '+UsersCreated+'</p>';
+                                htmlbody +='</table></centre></div>';
+        mail.setToAddresses(Sending);
+        mail.setHtmlBody(htmlBody);
+        mail.setSubject('License Management Status: ' + a.Status);
+        Messaging.sendEmail(new Messaging.SingleEmailMessage[] {mail});
+        System.debug('User Logs>>'+Userlog.size());
+        database.executeBatch(new User_Login_Batch(Userlog)); 
+        database.executeBatch(new AsyncContactUpdate_Batch(ContactUpdate));
+    }
+}
+
