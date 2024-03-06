@@ -1,0 +1,23 @@
+// To find duplicates based any field type
+
+List<Decimal> listOfPesonnelNumbers = new List<Decimal>();
+Map<Decimal,Decimal> valueCounts = new Map<Decimal,Decimal>();
+List<Contact> conList = [Select Id,WCT_Personnel_Number__c from contact where WCT_Personnel_Number__c!= null];
+for(Contact con : conList){
+    listOfPesonnelNumbers.add(con.WCT_Personnel_Number__c);
+}
+for (Decimal d : listOfPesonnelNumbers) {
+    if (valueCounts.containsKey(d)) {
+        valueCounts.put(d, valueCounts.get(d) + 1);
+    } else {     
+        valueCounts.put(d, 1);
+    }
+}
+
+List<Decimal> pNumber = new List<Decimal>();
+for (Decimal key : valueCounts.keySet()) {
+    if (valueCounts.get(key) > 1) {
+        pNumber.add(key);
+        System.debug('Duplicate Personnel Number : ' + key + ', Count: ' + valueCounts.get(key));       
+    }   
+}
