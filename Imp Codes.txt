@@ -14,17 +14,165 @@ for (Decimal d : listOfPesonnelNumbers) {
     }
 }
 
-List<Decimal> pNumber = new List<Decimal>();
+
 for (Decimal key : valueCounts.keySet()) {
     if (valueCounts.get(key) > 1) {
         pNumber.add(key);
         System.debug('Duplicate Personnel Number : ' + key + ', Count: ' + valueCounts.get(key));       
     }   
 }
-************************************
-//To Assign Soql result to a string
-String Nam = [Select Id,Name From Account][0].Name;
 
-************************************
+////////////////////////////////////////////////////////////////////////////////////////////////
+
+//Track History of object to show in another recordPage
+
+//Apex :
+
+public class IcmProductApproverController {
+
+    @AuraEnabled(cacheable=true)
+    public static List<Product_Approvers__c> getApproversHistory(Id pacId) {
+        List<Product_Approvers__c> AmList = [SELECT Name, (SELECT field, NewValue, OldValue, CreatedDate
+                                           FROM Histories WHERE field = 'Approver__c' ORDER BY CreatedDate Desc)
+                                           FROM Product_Approvers__c
+                                           WHERE Approval_Matrix__c = :pacId];
+        
+        return AmList;
+    }
+}
+
+//HTML
+
+<template>
+     <div class="slds-box slds-box_xx-small color" >
+         <b class="text"> <lightning-icon icon-name="action_list_component" alternative-text="Doc image" >
+             </lightning-icon>Product Approver History</b></div>
+    <div class="slds-box slds-box_xx-small">
+    <table class="slds-table slds-table_bordered slds-table_col-bordered">
+        <thead>
+            <tr>
+                
+                <th class="first">Product Approver</th>
+                <th>Date</th>
+                <th>Original Value</th>
+                <th>New Value</th>
+            </tr>
+        </thead>
+        <tbody>
+            <template for:each={appName} for:item="aml">
+            <template for:each={aml.Histories} for:item="history">
+                    <tr key={aml.Id}>
+                        <td>{aml.Name}</td> 
+                        <td>{history.CreatedDate}</td>
+                        <td>{history.OldValue}</td>
+                        <td>{history.NewValue}</td>
+                    </tr>
+                </template>
+            </template>
+        </tbody>
+    </table>
+    </div>
+</template>
+
+//JS
+
+import { LightningElement, wire, api } from 'lwc';
+import getApproversHistory from '@salesforce/apex/IcmProductApproverController.getApproversHistory';
+
+export default class IcmProductApproverHistory extends LightningElement {
+    @api recordId;
+    appName;
+    allData = {};
+
+    @wire(getApproversHistory, { pacId: '$recordId' })
+    AmList({ error, data }) {
+        if (data) {
+            this.appName = data.map((appId) => ({
+                Name: appId.Name,
+                Histories: appId.Histories.map((history) => ({
+                    NewValue: this.isTextOnly(history.NewValue) ? history.NewValue : '',
+                    OldValue: this.isTextOnly(history.OldValue) ? history.OldValue : '',
+                    CreatedDate: this.timeformat(history.CreatedDate),
+                    CreatedTime: parseInt(this.onlytime(history.CreatedDate), 10),
+                    CreatedDateTime: history.CreatedDate
+                })).filter(history => history.NewValue !== '' && history.OldValue !== '')
+            }));
+
+            console.log('Name__-----' + JSON.stringify(this.appName));
+
+           
+           
+        } else if (error) {
+            console.log(error);
+        }
+    }
+
+    isTextOnly(value) {
+        return typeof value === 'string' && /^[A-Za-z\s]+$/.test(value);
+    }
+
+ /* get setOrder() {
+    let allHistories = [];
+
+    if (this.appName && Array.isArray(this.appName)) {
+        for (let i = 0; i < this.appName.length; i++) {
+            allHistories = allHistories.concat(this.appName[i].Histories);
+        }
+    }
+
+    const sortedData = allHistories.slice().sort((a, b) => {
+        const dateA = new Date(a.CreatedDateTime);
+        const dateB = new Date(b.CreatedDateTime);
+
+        if (dateA > dateB) return -1;
+        if (dateA < dateB) return 1;
+    });
+
+    console.log('sortedData: ' + JSON.stringify(sortedData));
+
+    return sortedData;
+} */
+
+    timeformat(datavalue) {
+        const dateTimeValue = new Date(datavalue);
+
+        const month = dateTimeValue.getMonth() + 1;
+        const day = dateTimeValue.getDate();
+        const year = dateTimeValue.getFullYear();
+
+        let hours = dateTimeValue.getHours();
+        const minutes = dateTimeValue.getMinutes();
+        let ampm = hours >= 12 ? 'PM' : 'AM';
+        hours = hours % 12 || 12;
+
+        const formattedDateTime = `${day}/${month}/${year}, ${hours}:${minutes.toString().padStart(2, '0')} ${ampm}`;
+
+        return formattedDateTime;
+    }
+
+    onlytime(datavalue) {
+        const dateTimeValue = new Date(datavalue);
+
+        let hours = dateTimeValue.getHours();
+        const minutes = dateTimeValue.getMinutes();
+        let ampm = hours >= 12 ? 'PM' : 'AM';
+        hours = hours % 12 || 12;
+
+        const formattedTime = ` ${hours}:${minutes.toString().padStart(2, '0')} ${ampm}`;
+
+        return formattedTime;
+    }
+}
 
 
+//css
+
+.color{
+	background-color: rgba(194, 201, 206, 0.646) ;
+}
+
+.text{
+	font-size: 15px;
+}
+
+///////////////////////////////////////////////////////////////////////////////////////
