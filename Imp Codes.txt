@@ -28,3 +28,16 @@ String Nam = [Select Id,Name From Account][0].Name;
 ************************************
 
 
+let fList = [1, 2, 3, 4];
+let someint = 6;
+
+fList.map(re => {
+    for (let i = 0; i <= 3; i++) {
+        let val = re + fList[i];
+        let va =i;
+        if (val === someint) {
+            console.log('found match',va);
+        }
+    }
+});
+
